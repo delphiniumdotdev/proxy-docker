@@ -1,0 +1,26 @@
+networks:
+ default:
+   name: proxy
+
+services:
+ proxy:
+  image: nginxproxy/nginx-proxy:1.7-alpine
+  volumes:
+   - ./certs:/etc/nginx/certs
+   - ./configs:/etc/nginx/conf.d
+   - ./hosts:/etc/nginx/vhost.d
+   - /var/run/docker.sock:/tmp/docker.sock:ro
+  ports:
+   - '80:80'
+   - '443:443'
+  restart: always
+ 
+ acme:
+  image: nginxproxy/acme-companion:2.5
+  volumes_from:
+   - proxy
+  volumes:
+   - ./acme:/etc/acme.sh
+   - /var/run/docker.sock:/var/run/docker.sock:ro
+  restart: always
+  
