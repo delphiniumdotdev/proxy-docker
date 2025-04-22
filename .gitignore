@@ -1,0 +1,10 @@
+# Ignore the certificate directory
+certs/
+
+# Ignore the auto-generated directories
+acme/
+hosts/
+html/
+
+# Ignore the auto-generated config file
+configs/default.conf
