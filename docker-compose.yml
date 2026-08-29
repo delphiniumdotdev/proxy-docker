@@ -4,11 +4,13 @@ networks:
 
 services:
  proxy:
-  image: nginxproxy/nginx-proxy:1.7-alpine
+  image: nginxproxy/nginx-proxy:1.7
   volumes:
    - ./certs:/etc/nginx/certs
    - ./configs:/etc/nginx/conf.d
    - ./hosts:/etc/nginx/vhost.d
+   - ./vhost.d:/etc/nginx/vhost.d
+   - ./html:/usr/share/nginx/html
    - /var/run/docker.sock:/tmp/docker.sock:ro
   ports:
    - '80:80'
